@@ -21,14 +21,14 @@ class PlayMode(modeclass.Mode):
 
         while self.run_mode:
             self.block_array.display_blocks()
-            self.check_events()
+            self.check_events(pygame.event.get())
             pygame.display.flip()
         return self.scores
 
     # check_events increases the score if the user selects the correct square
     # otherwise, the play mode is ended
-    def check_events(self):
-        for event in pygame.event.get():
+    def check_events(self, events):
+        for event in events:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
@@ -41,7 +41,7 @@ class PlayMode(modeclass.Mode):
                     self.level = 0
                     self.run_mode = False
                 self.clear_screen()
-        super().check_events()
+        super().check_events(events)
 
     # set_calculated_block_array returns a block array with an increasingly difficult color and number of blocks
     # The color difference diminishes with the level and the block size increases at helpers.BLOCK_CHANGE_LEVELS

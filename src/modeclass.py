@@ -16,8 +16,8 @@ class Mode:
         return scores
 
     # check events checks to see if the events have been processed
-    def check_events(self):
-        for event in pygame.event.get():
+    def check_events(self, events):
+        for event in events:
             if event.type == pygame.QUIT:
                 pygame.display.quit()
                 pygame.quit()

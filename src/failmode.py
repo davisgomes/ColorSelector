@@ -20,16 +20,16 @@ class FailMode(modeclass.Mode):
             self.display_text("You have selected the wrong square", 32, -100)
             self.display_text("Score: " + str(scores[-1]), 32, -50)
             self.display_text("Click the different color to return to the menu", 24, 100)
-            self.check_events()
+            self.check_events(pygame.event.get())
             pygame.display.flip()
 
         return scores
 
     # check_events determines if the correct block was clicked
     # if so, we stop the fail mode display
-    def check_events(self):
-        for event in pygame.event.get():
+    def check_events(self, events):
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and self.block_array.check_mouse_press():
                 self.clear_screen()
                 self.run_mode = False
-        super().check_events()
+        super().check_events(events)

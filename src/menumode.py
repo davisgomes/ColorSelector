@@ -24,16 +24,16 @@ class MenuMode(modeclass.Mode):
             self.display_text("Select the square that has a different color", 24, 100)
             self.display_text("Select the different color to start", 18, 125)
             self.display_text("High Score: " + str(helpers.get_high_score(copy.deepcopy(scores))), 32, -50)
-            self.check_events()
+            self.check_events(pygame.event.get())
             pygame.display.flip()
 
         return scores
 
     # check_events checks to make sure the mouse is pressed on the correct square
     # if this is the case, the menu will close
-    def check_events(self):
-        for event in pygame.event.get():
+    def check_events(self, events):
+        for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and self.block_array.check_mouse_press():
                 self.clear_screen()
                 self.run_mode = False
-        super().check_events()
+        super().check_events(events)
